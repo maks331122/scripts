@@ -53,5 +53,5 @@ with open("/etc/resolv.conf", "w") as f:
 os.system("systemctl start named")
 os.system("systemctl enable named")
 os.system("systemctl restart named")
-
+os.system("nslookup {0}".format(nsstr))
 os.system("echo DNS налаштовано!!")
