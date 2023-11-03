@@ -1,10 +1,11 @@
 import os
+import sys
 
-ip = input('enter ip:')
+ip = sys.argv[1]
 
 os.chdir('/etc/nginx/sites-available/')
 
-instance = input('count instances:')
+instance = sys.argv[2]
 
 with open('site.conf', 'w') as f:
 	f.write("server {\n")
