@@ -13,7 +13,7 @@ with open('site.conf', 'w') as f:
 	f.write("	listen [::]:8080;\n")
 	f.write("	root /var/www/site/index.html;\n")
 	f.write("	index index.html;\n")
-	f.write("	server_name {0};\n".format(ip))
+	f.write("	server_name %s;\n" % ip)
 	f.write("	location / {\n")
 	f.write("		try_files $uri $uri/ =404;\n")
 	f.write("	}\n")
