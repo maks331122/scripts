@@ -1,31 +1,29 @@
 import os
 
-dns = input('Введіть ваш DNS:')
-try:
-	os.system('systemctl stop apache2')
-except (Exception):
-	pass
+ip = input('enter ip:')
 
 os.chdir('/etc/nginx/sites-available/')
 
-with open('{0}.conf'.format(dns.split('.')[0]), 'w') as f:
+instance = input('count instances:')
+
+with open('site.conf', 'w') as f:
 	f.write("server {\n")
-	f.write("	listen 80;\n")
-	f.write("	listen [::]:80;\n")
-	f.write("	root /var/www/{0};\n".format(dns.split('.')[0]))
+	f.write("	listen 8080;\n")
+	f.write("	listen [::]:8080;\n")
+	f.write("	root /var/www/site/index.html;\n")
 	f.write("	index index.html index.htm index.nginx-debian.html;\n")
-	f.write("	server_name {0};\n".format(dns))
+	f.write("	server_name {0};\n".format(ip))
 	f.write("	location / {\n")
 	f.write("		try_files $uri $uri/ =404;\n")
 	f.write("	}\n")
 	f.write("}\n")
 
-if not os.path.exists('/var/www/{0}'.format(dns.split('.')[0])):
-	os.mkdir('/var/www/{0}'.format(dns.split('.')[0]))
-	with open('/var/www/{0}/index.html'.format(dns.split('.')[0]), 'w') as f:
-		f.write('{0}'.format(dns.split('.')[0]))
+if not os.path.exists('/var/www/site'):
+	os.mkdir('/var/www/site')
+	with open('/var/www/site/index.html', 'w') as f:
+		f.write('site{0}'.format(instance))
 
-os.system('ln -n {0}.conf /etc/nginx/sites-enabled/{0}.conf'.format(dns.split('.')[0]))
+os.system('ln -n site.conf /etc/nginx/sites-enabled/site.conf')
 os.system('systemctl restart nginx')
 
 print('Nginx налаштовано!!')
