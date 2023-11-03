@@ -15,7 +15,7 @@ with open('haproxy.cfg', 'a') as f:
     f.write('backend http_ngback\n')
     f.write('    balance roundrobin\n')
     for ip in ip_addresses:
-        f.write('    server nginx-{0} {1}:8080 check\n'.format(ip_addresses.index(ip), ip))
+        f.write('    server nginx-{0} {1}:80 check\n'.format(ip_addresses.index(ip), ip))
 
 os.system('systemctl restart haproxy')
 
