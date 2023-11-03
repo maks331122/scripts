@@ -9,8 +9,8 @@ instance = sys.argv[2]
 
 with open('site.conf', 'w') as f:
 	f.write("server {\n")
-	f.write("	listen 8080;\n")
-	f.write("	listen [::]:8080;\n")
+	f.write("	listen 80;\n")
+	f.write("	listen [::]:80;\n")
 	f.write("	root /var/www/html/libro/public;\n")
 	f.write("	index index.html;\n")
 	f.write("	server_name %s;\n" % ip)
