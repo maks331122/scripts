@@ -19,9 +19,6 @@ with open('site.conf', 'w') as f:
 	f.write("	}\n")
 	f.write("}\n")
 
-with open('/var/www/html/index.html', 'w') as f:
-	f.write('site{0}'.format(instance))
-
 os.system('ln -n site.conf /etc/nginx/sites-enabled/site.conf')
 os.system('systemctl restart nginx')
 
